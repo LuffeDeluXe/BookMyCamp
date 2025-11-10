@@ -19,4 +19,4 @@ jobs:
     - name: Push Image to DockerHub
       run: |
        docker login -u luffedeluxe -p ${{ secrets.DOCKER_HUB_TOKEN }}
-       docker push luffedeluxe/bookmycamp:latest
+       docker push luffedeluxe/bookmycampadmin:latest
