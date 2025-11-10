@@ -9,6 +9,9 @@ FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG configuration=Release
 WORKDIR /src
 COPY ["AdminBlazor/AdminBlazor.csproj", "AdminBlazor/"]
+COPY ["Application/Application.csproj", "Application/"]
+COPY ["Domain/Domain.csproj", "Domain/"]
+COPY ["Infrastructure/Infrastructure.csproj", "Infrastructure/"]
 RUN dotnet restore "AdminBlazor/AdminBlazor.csproj"
 COPY . .
 WORKDIR "/src/AdminBlazor"
