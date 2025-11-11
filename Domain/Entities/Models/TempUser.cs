@@ -7,15 +7,13 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities.Models
 {
-    public class Spot : Resource
+    public class TempUser
     {
         [Key]
-        public int SpotId { get; set; }
+
+        public int TempUserId { get; set; }
 
         [Required]
-        public int MaximumLength { get; set; }
-
-        [Required]
-        public int MaximumWidth { get; set; }
+        public bool IsTempoary { get; set; }
     }
 }

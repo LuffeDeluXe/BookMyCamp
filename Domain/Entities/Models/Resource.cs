@@ -10,7 +10,7 @@ namespace Domain.Entities.Models
     public abstract class Resource
     {
         [Required]
-        public string Type { get; set; }
+        public string ResourceType { get; set; }
 
         [Required]
         public int Size { get; set; }

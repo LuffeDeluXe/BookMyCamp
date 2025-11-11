@@ -14,11 +14,11 @@ namespace Domain.Entities.Models
 
         public int BookingId { get; set; }
 
-        [ForeignKey ("TempGuestId")]
+        [ForeignKey ("TempUserId")]
 
-        public int TempGuestId { get; set; }
+        public int TempUserId { get; set; }
 
-        public virtual TempGuest TempGuest { get; set; }
+        public virtual TempUser TempUser { get; set; }
 
         [ForeignKey ("UserId")]
 
