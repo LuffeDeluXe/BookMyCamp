@@ -1,3 +1,4 @@
+using System.Net;
 using AdminBlazor.Components;
 
 namespace AdminBlazor;
@@ -11,6 +12,12 @@ public class Program
         // Add services to the container.
         builder.Services.AddRazorComponents()
             .AddInteractiveServerComponents();
+
+        builder.WebHost.ConfigureKestrel((context, serverOptions) =>
+        {
+            serverOptions.Listen(IPAddress.Loopback, 25001);
+            serverOptions.Listen(IPAddress.Loopback, 25003);
+        });
 
         var app = builder.Build();
 
