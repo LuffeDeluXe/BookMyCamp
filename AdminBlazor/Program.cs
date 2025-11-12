@@ -15,8 +15,8 @@ public class Program
 
         builder.WebHost.ConfigureKestrel((context, serverOptions) =>
         {
-            serverOptions.Listen(IPAddress.Loopback, 25001);
-            serverOptions.Listen(IPAddress.Loopback, 25003);
+            serverOptions.ListenAnyIP(25001);
+            serverOptions.ListenAnyIP(25003);
         });
 
         var app = builder.Build();
