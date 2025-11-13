@@ -26,22 +26,16 @@ namespace Domain.Entities.Models
 
         public virtual User User { get; set; }
 
-        [ForeignKey ("CabinId")]
 
-        public int CabinId { get; set; }
+        [ForeignKey ("ResourceId")]
 
-        public virtual Cabin Cabin { get; set; }
+        public int ResourceId { get; set; }
 
-        [ForeignKey ("SpotId")]
-
-        public int SpotId { get; set; }
-
-        public virtual Spot Spot { get; set; }
+        public virtual Resource Resource{ get; set; }
 
         public int GuestAmount { get; set; }
 
         [Required]
-
         public DateOnly StartDate { get; set; }
 
         [Required]

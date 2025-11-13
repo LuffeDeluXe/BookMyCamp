@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities.Models
 {
-    public class TempUser
+    public class TempUser : Guest
     {
         [Key]
 

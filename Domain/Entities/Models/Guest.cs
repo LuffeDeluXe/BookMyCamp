@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities.Models
 {
-    public abstract class Client
+    public abstract class Guest
     {
         [Required]
         public string Name { get; set; }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities.Models
 {
-    public class User : Client
+    public class User : Guest
     {
         [Key]
         public int UserId { get; set; }
