@@ -1,7 +1,7 @@
-using System.Net;
-using UserBlazor.Components;
+using GUI.Client.Pages;
+using GUI.Components;
 
-namespace UserBlazor;
+namespace GUI;
 
 public class Program
 {
@@ -11,18 +11,23 @@ public class Program
 
         // Add services to the container.
         builder.Services.AddRazorComponents()
-            .AddInteractiveServerComponents();
+            .AddInteractiveServerComponents()
+            .AddInteractiveWebAssemblyComponents();
 
         builder.WebHost.ConfigureKestrel((context, serverOptions) =>
         {
+            serverOptions.ListenAnyIP(25001);
             serverOptions.ListenAnyIP(25002);
-            serverOptions.ListenAnyIP(25004);
         });
 
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
-        if (!app.Environment.IsDevelopment())
+        if (app.Environment.IsDevelopment())
+        {
+            app.UseWebAssemblyDebugging();
+        }
+        else
         {
             app.UseExceptionHandler("/Error");
             // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
@@ -35,7 +40,9 @@ public class Program
         app.UseAntiforgery();
 
         app.MapRazorComponents<App>()
-            .AddInteractiveServerRenderMode();
+            .AddInteractiveServerRenderMode()
+            .AddInteractiveWebAssemblyRenderMode()
+            .AddAdditionalAssemblies(typeof(Client._Imports).Assembly);
 
         app.Run();
     }
