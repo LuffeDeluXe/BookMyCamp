@@ -13,7 +13,7 @@ COPY ["GUI/GUI.Client/GUI.Client.csproj", "GUI.Client/"]
 COPY ["Application/Application.csproj", "Application/"]
 COPY ["Domain/Domain.csproj", "Domain/"]
 COPY ["Infrastructure/Infrastructure.csproj", "Infrastructure/"]
-RUN dotnet restore "GUI/GUI/GUI.csproj"
+RUN dotnet restore "GUI\GUI\GUI.csproj"
 COPY . .
 WORKDIR "/src/GUI"
 RUN dotnet build "GUI.csproj" -c $configuration -o /app/build
