@@ -6,11 +6,14 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class AddMigrationInitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateSequence(
+                name: "GuestSequence");
+
             migrationBuilder.CreateTable(
                 name: "AddOns",
                 columns: table => new
@@ -147,18 +150,17 @@ namespace Infrastructure.Migrations
                 name: "TempUsers",
                 columns: table => new
                 {
-                    TempUserId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    IsTempoary = table.Column<bool>(type: "bit", nullable: false),
+                    GuestId = table.Column<int>(type: "int", nullable: false, defaultValueSql: "NEXT VALUE FOR [GuestSequence]"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PhoneNumber = table.Column<int>(type: "int", nullable: false),
                     LandCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LanguageId = table.Column<int>(type: "int", nullable: false)
+                    LanguageId = table.Column<int>(type: "int", nullable: false),
+                    IsTempoary = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TempUsers", x => x.TempUserId);
+                    table.PrimaryKey("PK_TempUsers", x => x.GuestId);
                     table.ForeignKey(
                         name: "FK_TempUsers_Languages_LanguageId",
                         column: x => x.LanguageId,
@@ -171,22 +173,21 @@ namespace Infrastructure.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Adress = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Country = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PostalCode = table.Column<int>(type: "int", nullable: false),
-                    HashedPassword = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    GuestId = table.Column<int>(type: "int", nullable: false, defaultValueSql: "NEXT VALUE FOR [GuestSequence]"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PhoneNumber = table.Column<int>(type: "int", nullable: false),
                     LandCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LanguageId = table.Column<int>(type: "int", nullable: false)
+                    LanguageId = table.Column<int>(type: "int", nullable: false),
+                    Adress = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Country = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PostalCode = table.Column<int>(type: "int", nullable: false),
+                    HashedPassword = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.UserId);
+                    table.PrimaryKey("PK_Users", x => x.GuestId);
                     table.ForeignKey(
                         name: "FK_Users_Languages_LanguageId",
                         column: x => x.LanguageId,
@@ -227,8 +228,7 @@ namespace Infrastructure.Migrations
                 {
                     BookingId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TempUserId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false),
+                    GuestId = table.Column<int>(type: "int", nullable: false),
                     ResourceId = table.Column<int>(type: "int", nullable: false),
                     GuestAmount = table.Column<int>(type: "int", nullable: false),
                     StartDate = table.Column<DateOnly>(type: "date", nullable: false),
@@ -241,17 +241,8 @@ namespace Infrastructure.Migrations
                         name: "FK_Bookings_Resources_ResourceId",
                         column: x => x.ResourceId,
                         principalTable: "Resources",
-                        principalColumn: "ResourceId");
-                    table.ForeignKey(
-                        name: "FK_Bookings_TempUsers_TempUserId",
-                        column: x => x.TempUserId,
-                        principalTable: "TempUsers",
-                        principalColumn: "TempUserId");
-                    table.ForeignKey(
-                        name: "FK_Bookings_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "UserId");
+                        principalColumn: "ResourceId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -260,19 +251,14 @@ namespace Infrastructure.Migrations
                 column: "AddOnId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Bookings_GuestId",
+                table: "Bookings",
+                column: "GuestId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Bookings_ResourceId",
                 table: "Bookings",
                 column: "ResourceId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Bookings_TempUserId",
-                table: "Bookings",
-                column: "TempUserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Bookings_UserId",
-                table: "Bookings",
-                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_EmployeeLanguages_EmployeeId",
@@ -319,25 +305,28 @@ namespace Infrastructure.Migrations
                 name: "Invoices");
 
             migrationBuilder.DropTable(
-                name: "AddOns");
-
-            migrationBuilder.DropTable(
-                name: "Resources");
-
-            migrationBuilder.DropTable(
                 name: "TempUsers");
 
             migrationBuilder.DropTable(
                 name: "Users");
 
             migrationBuilder.DropTable(
+                name: "AddOns");
+
+            migrationBuilder.DropTable(
+                name: "Resources");
+
+            migrationBuilder.DropTable(
                 name: "Employees");
+
+            migrationBuilder.DropTable(
+                name: "Languages");
 
             migrationBuilder.DropTable(
                 name: "SeasonPrices");
 
-            migrationBuilder.DropTable(
-                name: "Languages");
+            migrationBuilder.DropSequence(
+                name: "GuestSequence");
         }
     }
 }

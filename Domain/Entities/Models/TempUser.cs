@@ -9,9 +9,6 @@ namespace Domain.Entities.Models
 {
     public class TempUser : Guest
     {
-        [Key]
-
-        public int TempUserId { get; set; }
 
         [Required]
         public bool IsTempoary { get; set; }

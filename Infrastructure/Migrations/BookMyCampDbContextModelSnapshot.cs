@@ -22,6 +22,8 @@ namespace Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.HasSequence("GuestSequence");
+
             modelBuilder.Entity("Domain.Entities.Models.AddOn", b =>
                 {
                     b.Property<int>("AddOnId")
@@ -80,25 +82,20 @@ namespace Infrastructure.Migrations
                     b.Property<int>("GuestAmount")
                         .HasColumnType("int");
 
+                    b.Property<int>("GuestId")
+                        .HasColumnType("int");
+
                     b.Property<int>("ResourceId")
                         .HasColumnType("int");
 
                     b.Property<DateOnly>("StartDate")
                         .HasColumnType("date");
 
-                    b.Property<int>("TempUserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("BookingId");
 
+                    b.HasIndex("GuestId");
+
                     b.HasIndex("ResourceId");
-
-                    b.HasIndex("TempUserId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Bookings");
                 });
@@ -169,6 +166,42 @@ namespace Infrastructure.Migrations
                     b.HasKey("FacilityId");
 
                     b.ToTable("Facilities");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Models.Guest", b =>
+                {
+                    b.Property<int>("GuestId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValueSql("NEXT VALUE FOR [GuestSequence]");
+
+                    SqlServerPropertyBuilderExtensions.UseSequence(b.Property<int>("GuestId"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LandCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("LanguageId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PhoneNumber")
+                        .HasColumnType("int");
+
+                    b.HasKey("GuestId");
+
+                    b.HasIndex("LanguageId");
+
+                    b.ToTable((string)null);
+
+                    b.UseTpcMappingStrategy();
                 });
 
             modelBuilder.Entity("Domain.Entities.Models.Invoice", b =>
@@ -275,47 +308,17 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.Models.TempUser", b =>
                 {
-                    b.Property<int>("TempUserId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TempUserId"));
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.HasBaseType("Domain.Entities.Models.Guest");
 
                     b.Property<bool>("IsTempoary")
                         .HasColumnType("bit");
-
-                    b.Property<string>("LandCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("LanguageId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PhoneNumber")
-                        .HasColumnType("int");
-
-                    b.HasKey("TempUserId");
-
-                    b.HasIndex("LanguageId");
 
                     b.ToTable("TempUsers");
                 });
 
             modelBuilder.Entity("Domain.Entities.Models.User", b =>
                 {
-                    b.Property<int>("UserId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
+                    b.HasBaseType("Domain.Entities.Models.Guest");
 
                     b.Property<string>("Adress")
                         .IsRequired()
@@ -329,34 +332,12 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("HashedPassword")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("LandCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("LanguageId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PhoneNumber")
-                        .HasColumnType("int");
-
                     b.Property<int>("PostalCode")
                         .HasColumnType("int");
-
-                    b.HasKey("UserId");
-
-                    b.HasIndex("LanguageId");
 
                     b.ToTable("Users");
                 });
@@ -374,29 +355,21 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.Models.Booking", b =>
                 {
+                    b.HasOne("Domain.Entities.Models.Guest", "Guest")
+                        .WithMany()
+                        .HasForeignKey("GuestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Domain.Entities.Models.Resource", "Resource")
                         .WithMany()
                         .HasForeignKey("ResourceId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Entities.Models.TempUser", "TempUser")
-                        .WithMany()
-                        .HasForeignKey("TempUserId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                    b.Navigation("Guest");
 
                     b.Navigation("Resource");
-
-                    b.Navigation("TempUser");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Domain.Entities.Models.EmployeeLanguage", b =>
@@ -418,6 +391,17 @@ namespace Infrastructure.Migrations
                     b.Navigation("Language");
                 });
 
+            modelBuilder.Entity("Domain.Entities.Models.Guest", b =>
+                {
+                    b.HasOne("Domain.Entities.Models.Language", "Language")
+                        .WithMany()
+                        .HasForeignKey("LanguageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Language");
+                });
+
             modelBuilder.Entity("Domain.Entities.Models.Resource", b =>
                 {
                     b.HasOne("Domain.Entities.Models.SeasonPrice", "SeasonPrice")
@@ -427,28 +411,6 @@ namespace Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("SeasonPrice");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Models.TempUser", b =>
-                {
-                    b.HasOne("Domain.Entities.Models.Language", "Language")
-                        .WithMany()
-                        .HasForeignKey("LanguageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Language");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Models.User", b =>
-                {
-                    b.HasOne("Domain.Entities.Models.Language", "Language")
-                        .WithMany()
-                        .HasForeignKey("LanguageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Language");
                 });
 #pragma warning restore 612, 618
         }
