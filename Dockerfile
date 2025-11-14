@@ -8,8 +8,8 @@ USER app
 FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG configuration=Release
 WORKDIR /src
-COPY ["GUI/GUI/GUI.csproj", "GUI/"]
-COPY ["GUI/GUI.Client/GUI.Client.csproj", "GUI.Client/"]
+COPY ["GUI/GUI/GUI.csproj", "GUI/GUI/"]
+COPY ["GUI/GUI.Client/GUI.Client.csproj", "GUI/GUI.Client/"]
 COPY ["Application/Application.csproj", "Application/"]
 COPY ["Domain/Domain.csproj", "Domain/"]
 COPY ["Infrastructure/Infrastructure.csproj", "Infrastructure/"]
