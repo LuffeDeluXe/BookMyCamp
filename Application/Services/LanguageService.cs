@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Application.RepositoryInterfaces;
 using Application.ServiceInterfaces;
 
 namespace Application.Services
 {
     public class LanguageService : ILanguageService
     {
-        private readonly ILanguageService _languageService;
+        private readonly ILanguageRepository _languageRepository;
 
-        public LanguageService(ILanguageService languageService)
+        public LanguageService(ILanguageRepository languageRepository)
         {
-            _languageService = languageService;
+            _languageRepository = languageRepository;
         }
     }
 }
