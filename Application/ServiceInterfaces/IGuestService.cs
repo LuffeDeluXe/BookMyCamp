@@ -9,7 +9,7 @@ namespace Application.ServiceInterfaces
 {
     public interface IGuestService
     {
-        Task CreateUserAsync(User user);
+        Task<string> CreateUserAsync(User user);
 
         Task<User?> GetUserByIdAsync(int id);
 

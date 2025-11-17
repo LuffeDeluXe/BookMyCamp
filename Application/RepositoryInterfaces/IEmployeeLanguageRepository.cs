@@ -9,12 +9,12 @@ namespace Application.RepositoryInterfaces
 {
     public interface IEmployeeLanguageRepository
     {
-        Task CreateEmployeeLanguageAsync(EmployeeLanguage employeeLanguage);
+        Task<int> CreateEmployeeLanguageAsync(EmployeeLanguage employeeLanguage);
 
         Task<EmployeeLanguage?> GetEmployeeLanguageByIdAsync(int id);
 
-        Task UpdateEmployeeLanguageAsync(EmployeeLanguage employeeLanguage);
+        Task<int> UpdateEmployeeLanguageAsync(EmployeeLanguage employeeLanguage);
 
-        Task DeleteEmployeeLanguageAsync(EmployeeLanguage employeeLanguage);
+        Task<int> DeleteEmployeeLanguageAsync(EmployeeLanguage employeeLanguage);
     }
 }

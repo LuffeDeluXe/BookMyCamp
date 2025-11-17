@@ -18,10 +18,11 @@ namespace Infrastructure.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task CreateEmployeeLanguageAsync(EmployeeLanguage employeeLanguage)
+        public async Task<int> CreateEmployeeLanguageAsync(EmployeeLanguage employeeLanguage)
         {
+            int result;
             await _dbContext.AddAsync(employeeLanguage);
-            await _dbContext.SaveChangesAsync();
+            return result = await _dbContext.SaveChangesAsync();
         }
 
         public async Task<EmployeeLanguage?> GetEmployeeLanguageByIdAsync(int id)
@@ -29,16 +30,18 @@ namespace Infrastructure.Repositories
             return await _dbContext.EmployeeLanguages.FindAsync(id);
         }
 
-        public async Task UpdateEmployeeLanguageAsync(EmployeeLanguage employeeLanguage)
+        public async Task<int> UpdateEmployeeLanguageAsync(EmployeeLanguage employeeLanguage)
         {
+            int result;
             _dbContext.EmployeeLanguages.Update(employeeLanguage);
-            await _dbContext.SaveChangesAsync();
+            return result = await _dbContext.SaveChangesAsync();
         }
 
-        public async Task DeleteEmployeeLanguageAsync(EmployeeLanguage employeeLanguage)
+        public async Task<int> DeleteEmployeeLanguageAsync(EmployeeLanguage employeeLanguage)
         {
+            int result;
             _dbContext.Update(employeeLanguage);
-            await _dbContext.SaveChangesAsync();
+            return result = await _dbContext.SaveChangesAsync();
         }
 
     }

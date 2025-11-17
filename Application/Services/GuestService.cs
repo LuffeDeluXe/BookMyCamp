@@ -17,9 +17,21 @@ namespace Application.Services
         {
             _userRepository = userRepository;
         }
-        public async Task CreateUserAsync(User user)
+        public async Task<string> CreateUserAsync(User user)
         {
-            await _userRepository.CreateUserAsync(user);
+            int result;
+            string message;
+            result = await _userRepository.CreateUserAsync(user);
+
+            if (result == 0)
+            {
+                message = "fejl";
+            }
+            else 
+            {
+                message = "success";
+            }
+            return message;
         }
 
         public async Task<User?> GetUserByIdAsync(int id)

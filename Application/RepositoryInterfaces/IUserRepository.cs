@@ -9,12 +9,12 @@ namespace Application.RepositoryInterfaces
 {
     public interface IUserRepository
     {
-        Task CreateUserAsync(User user);
+        Task<int> CreateUserAsync(User user);
 
         Task<User?> GetUserByIdAsync(int id);
 
-        Task UpdateUserAsync(User user);
+        Task<int> UpdateUserAsync(User user);
 
-        Task DeleteUserAsync(User user);
+        Task<int> DeleteUserAsync(User user);
     }
 }

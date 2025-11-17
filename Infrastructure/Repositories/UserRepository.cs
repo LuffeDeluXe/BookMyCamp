@@ -17,10 +17,11 @@ namespace Infrastructure.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task CreateUserAsync(User user)
+        public async Task<int> CreateUserAsync(User user)
         {
+            int result;
             await _dbContext.Users.AddAsync(user);
-            await _dbContext.SaveChangesAsync();
+            return result = await _dbContext.SaveChangesAsync();
         }
 
         public async Task<User?> GetUserByIdAsync(int id)
@@ -28,16 +29,18 @@ namespace Infrastructure.Repositories
             return await _dbContext.Users.FindAsync(id);
         }
 
-        public async Task UpdateUserAsync(User user)
+        public async Task<int> UpdateUserAsync(User user)
         {
+            int result;
             _dbContext.Users.Update(user);
-            await _dbContext.SaveChangesAsync();
+            return result = await _dbContext.SaveChangesAsync();
         }
 
-        public async Task DeleteUserAsync(User user)
+        public async Task<int> DeleteUserAsync(User user)
         {
+            int result;
             _dbContext.Users.Remove(user);
-            await _dbContext.SaveChangesAsync();
+            return result = await _dbContext.SaveChangesAsync();
         }
 
 
