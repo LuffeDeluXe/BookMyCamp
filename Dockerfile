@@ -15,7 +15,7 @@ COPY ["Domain/Domain.csproj", "Domain/"]
 COPY ["Infrastructure/Infrastructure.csproj", "Infrastructure/"]
 RUN dotnet restore "GUI/GUI/GUI.csproj"
 COPY . .
-WORKDIR "/src"
+WORKDIR "/src/GUI/GUI"
 RUN dotnet build "GUI.csproj" -c $configuration -o /app/build
 
 FROM build AS publish
