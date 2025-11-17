@@ -2,6 +2,8 @@ using GUI.Client.Pages;
 using GUI.Components;
 using Application.ServiceInterfaces;
 using Application.Services;
+using Infrastructure;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace GUI;
 
@@ -23,11 +25,11 @@ public class Program
         });
 
         //DBContext Injection
-
+        builder.Services.AddDbContext<BookMyCampDbContext>();
 
         //Service Injection
-        builder.Services.AddScoped<IAdminService, AdminService>();
         builder.Services.AddScoped<IBookingService, BookingService>();
+        builder.Services.AddScoped<IEmployeeService, EmployeeService>();
         builder.Services.AddScoped<IGuestService, GuestService>();
 
         //Repository Injection
