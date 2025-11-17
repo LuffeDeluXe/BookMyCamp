@@ -41,14 +41,7 @@ namespace Infrastructure
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-
-            // Apply TPC mapping strategy at the root level only
             modelBuilder.Entity<Guest>().UseTpcMappingStrategy();
-
-            //// Optional: name tables explicitly
-            //modelBuilder.Entity<User>().ToTable("Users");
-            //modelBuilder.Entity<TempUser>().ToTable("TempUsers");
-
 
         }
     }
