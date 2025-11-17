@@ -1,5 +1,7 @@
 using GUI.Client.Pages;
 using GUI.Components;
+using Application.ServiceInterfaces;
+using Application.Services;
 
 namespace GUI;
 
@@ -19,6 +21,17 @@ public class Program
             serverOptions.ListenAnyIP(25001);
             serverOptions.ListenAnyIP(25002);
         });
+
+        //DBContext Injection
+
+
+        //Service Injection
+        builder.Services.AddScoped<IAdminService, AdminService>();
+        builder.Services.AddScoped<IBookingService, BookingService>();
+        builder.Services.AddScoped<IGuestService, GuestService>();
+
+        //Repository Injection
+
 
         var app = builder.Build();
 
