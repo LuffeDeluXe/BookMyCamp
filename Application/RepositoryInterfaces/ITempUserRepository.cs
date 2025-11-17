@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Application.RepositoryInterfaces
 {
-    internal interface ITempUserRepository
+    public interface ITempUserRepository
     {
     }
 }

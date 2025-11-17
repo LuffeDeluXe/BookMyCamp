@@ -9,8 +9,6 @@ namespace Domain.Entities.Models
 {
     public class User : Guest
     {
-        [Key]
-        public int UserId { get; set; }
 
         [Required]
         public string Adress {  get; set; }

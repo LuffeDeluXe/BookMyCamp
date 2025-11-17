@@ -10,6 +10,8 @@ namespace Domain.Entities.Models
 {
     public abstract class Guest
     {
+        [Key]
+        public int GuestId { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]
