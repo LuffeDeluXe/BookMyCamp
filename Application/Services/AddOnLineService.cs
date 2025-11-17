@@ -9,5 +9,11 @@ namespace Application.Services
 {
     public class AddOnLineService : IAddOnLineService
     {
+        private readonly IAddOnLineService _addOnLineService;
+
+        public AddOnLineService(IAddOnLineService addOnLineService)
+        {
+            _addOnLineService = addOnLineService;
+        }
     }
 }
