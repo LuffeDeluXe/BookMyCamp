@@ -1,4 +1,4 @@
-name: Admin Docker Image CI
+name: Docker Release Image CI
 
 on:
   push:
