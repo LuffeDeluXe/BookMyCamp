@@ -5,10 +5,11 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Application.RepositoryInterfaces;
 
 namespace Infrastructure.Repositories
 {
-    public class BookingRepository
+    public class BookingRepository : IBookingRepository
     {
         private readonly BookMyCampDbContext _dbContext;
 
