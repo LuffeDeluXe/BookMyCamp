@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Application.RepositoryInterfaces;
 using Application.ServiceInterfaces;
+using Domain.Entities.Models;
 
 namespace Application.Services
 {
@@ -15,6 +16,21 @@ namespace Application.Services
         public EmployeeLanguageService(IEmployeeLanguageRepository employeeLanguageRepository)
         {
             _employeeLanguageRepository = employeeLanguageRepository;
+        }
+
+        public async Task CreateEmployeeLanguageAsync(EmployeeLanguage employeeLanguage)
+        {
+            await _employeeLanguageRepository.CreateEmployeeLanguageAsync(employeeLanguage);
+        }
+
+        public async Task<EmployeeLanguage?> GetEmployeeLanguageByIdAsync(int id)
+        {
+            return await _employeeLanguageRepository.GetEmployeeLanguageByIdAsync(id);
+        }
+
+        public async Task UpdateEmployeeLanguageAsync(EmployeeLanguage existingEmployeeLanguage, EmployeeLanguage updatedEmployeeLanguage)
+        {
+            await _employeeLanguageRepository.UpdateEmployeeLanguageAsync(existingEmployeeLanguage);
         }
     }
 }

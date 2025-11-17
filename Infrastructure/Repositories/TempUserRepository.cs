@@ -9,11 +9,11 @@ namespace Infrastructure.Repositories
 {
     public class TempUserRepository : ITempUserRepository
     {
-        private readonly ITempUserRepository _tempUserRepository;
+        private readonly BookMyCampDbContext _dbContext;
 
-        public TempUserRepository(ITempUserRepository tempUserRepository)
+        public TempUserRepository(BookMyCampDbContext dbContext)
         {
-            _tempUserRepository = tempUserRepository;
+            _dbContext = dbContext;
         }
     }
 }

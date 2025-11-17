@@ -9,11 +9,11 @@ namespace Infrastructure.Repositories
 {
     public class ResourceRepository : IResourceRepository
     {
-        private readonly IResourceRepository _resourceRepository;
+        private readonly BookMyCampDbContext _dbContext;
 
-        public ResourceRepository(IResourceRepository resourceRepository)
+        public ResourceRepository(BookMyCampDbContext dbContext)
         {
-            _resourceRepository = resourceRepository;
+            _dbContext = dbContext;
         }
     }
 }
