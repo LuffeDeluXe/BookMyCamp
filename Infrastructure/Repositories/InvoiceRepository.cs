@@ -9,11 +9,11 @@ namespace Infrastructure.Repositories
 {
     public class InvoiceRepository : IInvoiceRepository
     {
-        private readonly IInvoiceRepository _invoiceRepository;
+        private readonly BookMyCampDbContext _dbContext;
 
-        public InvoiceRepository(IInvoiceRepository invoiceRepository)
+        public InvoiceRepository(BookMyCampDbContext dbContext)
         {
-            _invoiceRepository = invoiceRepository;
+            _dbContext = dbContext;
         }
     }
 }

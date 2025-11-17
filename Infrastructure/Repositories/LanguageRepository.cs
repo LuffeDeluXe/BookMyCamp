@@ -9,11 +9,11 @@ namespace Infrastructure.Repositories
 {
     public class LanguageRepository : ILanguageRepository
     {
-        private readonly ILanguageRepository _languageRepository;
+        private readonly BookMyCampDbContext _dbContext;
 
-        public LanguageRepository(ILanguageRepository languageRepository)
+        public LanguageRepository(BookMyCampDbContext dbContext)
         {
-            _languageRepository = languageRepository;
+            _dbContext = dbContext;
         }
     }
 }

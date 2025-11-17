@@ -3,17 +3,40 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Application.RepositoryInterfaces;
 using Application.ServiceInterfaces;
+using Domain.Entities.Models;
 
 namespace Application.Services
 {
     public class GuestService : IGuestService
     {
-        private readonly IGuestService _guestService;
+        private readonly IUserRepository _userRepository;
 
-        public GuestService(IGuestService guestService)
+        public GuestService(IUserRepository userRepository)
         {
-            _guestService = guestService;
+            _userRepository = userRepository;
+        }
+        public async Task CreateUserAsync(User user)
+        {
+            await _userRepository.CreateUserAsync(user);
+        }
+
+        public async Task<User?> GetUserByIdAsync(int id)
+        {
+            return await _userRepository.GetUserByIdAsync(id);
+        }
+
+        public async Task UpdateUserAsync(User existingUser, User updatedUser)
+        {
+           await _userRepository.UpdateUserAsync(existingUser);
+
+        }
+
+        public async Task DeleteUserAsync(User user)
+        {
+           await _userRepository.DeleteUserAsync(user);
         }
     }
+
 }

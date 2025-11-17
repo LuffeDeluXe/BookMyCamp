@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Entities.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,12 @@ namespace Application.ServiceInterfaces
 {
     public interface IGuestService
     {
+        Task CreateUserAsync(User user);
+
+        Task<User?> GetUserByIdAsync(int id);
+
+        Task UpdateUserAsync(User existingUser, User updatedUser);
+
+        Task DeleteUserAsync(User user);
     }
 }
