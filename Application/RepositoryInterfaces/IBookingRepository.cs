@@ -13,6 +13,8 @@ namespace Application.RepositoryInterfaces
 
         Task<Booking?> GetBookingByIdAsync(int id);
 
+        Task<List<Booking>> GetAllBookingsAsync();
+
         Task<int> UpdateBookingAsync(Booking booking);
 
         Task<int> DeleteBookingAsync(Booking booking);

@@ -13,6 +13,8 @@ namespace Application.RepositoryInterfaces
 
         Task<AddOnLine?> GetAddOnLineById(int id);
 
+        Task<List<AddOnLine>> GetAllAddOnLinesAsync();
+
         Task<int> UpdateAddOnLineAsync(AddOnLine addOnLine);
 
         Task<int> DeleteAddOnLineAsync(AddOnLine addOnLine);

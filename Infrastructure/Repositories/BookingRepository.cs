@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Application.RepositoryInterfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories
 {
@@ -20,8 +21,10 @@ namespace Infrastructure.Repositories
 
         public async Task<int> CreateBookingAsync (Booking booking)
         {
-            await _dbContext.Bookings.AddAsync (booking);
             int result;
+
+            await _dbContext.Bookings.AddAsync (booking);
+           
 
             return result = await _dbContext.SaveChangesAsync();
         }
@@ -31,20 +34,27 @@ namespace Infrastructure.Repositories
             return await _dbContext.Bookings.FindAsync(id);
         }
 
+        public async Task<List<Booking>> GetAllBookingsAsync()
+        {
+            return await _dbContext.Bookings.ToListAsync();
+        }
+
+
         public async Task<int> UpdateBookingAsync (Booking booking)
         {
-             _dbContext.Bookings.Update (booking);
-
             int result;
+
+            _dbContext.Bookings.Update (booking);
 
             return result = await _dbContext.SaveChangesAsync();
         }
 
         public async Task<int> DeleteBookingAsync (Booking booking)
         {
-            _dbContext.Bookings.Remove (booking);
             int result;
 
+            _dbContext.Bookings.Remove (booking);
+  
             return result = await _dbContext.SaveChangesAsync();
         }
     }

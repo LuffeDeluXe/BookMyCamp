@@ -30,6 +30,12 @@ namespace Infrastructure.Repositories
             return await _dbContext.EmployeeLanguages.FindAsync(id);
         }
 
+        public async Task<List<EmployeeLanguage>> GetAllEmployeeLanguagesAsync()
+        {
+            return await _dbContext.EmployeeLanguages.ToListAsync();
+        }
+
+
         public async Task<int> UpdateEmployeeLanguageAsync(EmployeeLanguage employeeLanguage)
         {
             int result;

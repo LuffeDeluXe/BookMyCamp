@@ -23,7 +23,7 @@ namespace Application.Services
         public async Task<string> CreateAddOnLineAsync (AddOnLine addOnLine)
         {
             int result;
-            string message;
+
             result = await _addOnLineRepository.CreateAddOnLineAsync(addOnLine);
 
             if (result == 0)
@@ -40,16 +40,38 @@ namespace Application.Services
 
         }
 
-        public async Task UpdateAddOnLineAsync (AddOnLine existingAddOnLine, AddOnLine updatedAddOnLine)
+        public async Task<List<AddOnLine>> GetAllAddOnLinesAsync ()
         {
+            return await _addOnLineRepository.GetAllAddOnLinesAsync();
+        }
 
-            await _addOnLineRepository.UpdateAddOnLineAsync(existingAddOnLine);
+        public async Task<string> UpdateAddOnLineAsync (AddOnLine existingAddOnLine, AddOnLine updatedAddOnLine)
+        {
+            int result;
+
+            result = await _addOnLineRepository.UpdateAddOnLineAsync(existingAddOnLine);
+
+            if (result == 0) 
+            { 
+                throw new UpdateEntityException<AddOnLine>();
+            }
+
+            return SuccessMessage.Updated<AddOnLine>();
 
         }
 
-        public async Task DeleteAddOnLineAsync (AddOnLine addOnLine)
+        public async Task<string> DeleteAddOnLineAsync (AddOnLine addOnLine)
         {
-            await _addOnLineRepository.DeleteAddOnLineAsync(addOnLine);
+            int result;
+
+            result = await _addOnLineRepository.DeleteAddOnLineAsync(addOnLine);
+
+            if (result == 0)
+            {
+                throw new DeleteEntityException<AddOnLine>();
+            }
+
+            return SuccessMessage.Deleted<AddOnLine>();
         }
     }
 }
