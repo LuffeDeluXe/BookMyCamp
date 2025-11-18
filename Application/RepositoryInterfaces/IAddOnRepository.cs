@@ -13,6 +13,8 @@ namespace Application.RepositoryInterfaces
 
         Task<AddOn?> GetAddOnByIdAsync(int id);
 
+        Task<List<AddOn>> GetAllAddOnsAsync();
+
         Task<int> UpdateAddOnAsync(AddOn addOn);
 
         Task<int> DeleteAddOnAsync(AddOn addOn);

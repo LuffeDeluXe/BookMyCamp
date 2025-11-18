@@ -9,13 +9,13 @@ namespace Application.ServiceInterfaces
 {
     public interface IBookingService
     {
-        Task CreateBookingAsync(Booking booking);
+        Task<string> CreateBookingAsync(Booking booking);
 
         Task<Booking?> GetBookingByIdAsync(int id);
 
-        Task UpdateBookingById(Booking existingBooking, Booking updatedBooking);
+        Task<string> UpdateBookingById(Booking existingBooking, Booking updatedBooking);
 
-        Task DeleteBookingAsync(Booking booking);
+        Task<string> DeleteBookingAsync(Booking booking);
 
         }
 }
