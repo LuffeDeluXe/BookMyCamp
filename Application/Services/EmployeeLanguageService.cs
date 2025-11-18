@@ -18,9 +18,21 @@ namespace Application.Services
             _employeeLanguageRepository = employeeLanguageRepository;
         }
 
-        public async Task CreateEmployeeLanguageAsync(EmployeeLanguage employeeLanguage)
+        public async Task<string> CreateEmployeeLanguageAsync(EmployeeLanguage employeeLanguage)
         {
-            await _employeeLanguageRepository.CreateEmployeeLanguageAsync(employeeLanguage);
+            int result;
+            string message;
+            result = await _employeeLanguageRepository.CreateEmployeeLanguageAsync(employeeLanguage);
+
+            if (result == 0) 
+            {
+                message = "fejl";
+            }
+            else 
+            {
+                message = "success";
+            }
+            return message;
         }
 
         public async Task<EmployeeLanguage?> GetEmployeeLanguageByIdAsync(int id)
@@ -28,9 +40,37 @@ namespace Application.Services
             return await _employeeLanguageRepository.GetEmployeeLanguageByIdAsync(id);
         }
 
-        public async Task UpdateEmployeeLanguageAsync(EmployeeLanguage existingEmployeeLanguage, EmployeeLanguage updatedEmployeeLanguage)
+        public async Task<string> UpdateEmployeeLanguageAsync(EmployeeLanguage existingEmployeeLanguage, EmployeeLanguage updatedEmployeeLanguage)
         {
-            await _employeeLanguageRepository.UpdateEmployeeLanguageAsync(existingEmployeeLanguage);
+            int result;
+            string message;
+            result = await _employeeLanguageRepository.UpdateEmployeeLanguageAsync(existingEmployeeLanguage);
+            if (result == 0)
+            {
+                message = "fejl";
+            }
+            else
+            {
+                message = "success";
+            }
+            return message;
+        }
+
+        public async Task<string> DeleteEmployeeLanguageAsync(EmployeeLanguage employeeLanguage)
+        {
+            int result;
+            string message;
+            result = await _employeeLanguageRepository.DeleteEmployeeLanguageAsync(employeeLanguage);
+
+            if (result == 0)
+            {
+                message = "fejl";
+            }
+            else
+            {
+                message = "success";
+            }
+            return message;
         }
     }
 }
