@@ -1,19 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using Application.ServiceInterfaces;
+using BCrypt.Net;
+using Bcrypt = BCrypt.Net.BCrypt;
 
 namespace Application.Services
 {
     public class PasswordHasherService : IPasswordHasherService
     {
-        private readonly IPasswordHasherService _passwordHasherService;
-
-        public PasswordHasherService(IPasswordHasherService passwordHasherService)
+        public string HashPassword(string password)
         {
-            _passwordHasherService = passwordHasherService;
+            string hashedPassword;
+            hashedPassword = Bcrypt.EnhancedHashPassword(password);
+            return hashedPassword;
         }
     }
 }

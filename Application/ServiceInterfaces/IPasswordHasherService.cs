@@ -8,5 +8,6 @@ namespace Application.ServiceInterfaces
 {
     public interface IPasswordHasherService
     {
+        string HashPassword(string password);
     }
 }
