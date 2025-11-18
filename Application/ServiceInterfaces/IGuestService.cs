@@ -13,8 +13,8 @@ namespace Application.ServiceInterfaces
 
         Task<User?> GetUserByIdAsync(int id);
 
-        Task UpdateUserAsync(User existingUser, User updatedUser);
+        Task<string> UpdateUserAsync(User existingUser, User updatedUser);
 
-        Task DeleteUserAsync(User user);
+        Task<string> DeleteUserAsync(User user);
     }
 }
