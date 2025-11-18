@@ -3,17 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Application.RepositoryInterfaces;
 using Application.ServiceInterfaces;
+using Domain.Entities.Models;
 
 namespace Application.Services
 {
     public class FacilityService : IFacilityService
     {
-        private readonly IFacilityService _facilityService;
+        private readonly IFacilityRepository _facilityRepository;
 
-        public FacilityService(IFacilityService facilityService)
+        public FacilityService(IFacilityRepository facilityRepository)
         {
-            _facilityService = facilityService;
+            _facilityRepository = facilityRepository;
+        }
+
+        public async Task CreateFacilityAsync (Facility facility)
+        {
+
         }
     }
 }

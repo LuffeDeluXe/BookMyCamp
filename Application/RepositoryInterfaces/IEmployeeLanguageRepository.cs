@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Entities.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,12 @@ namespace Application.RepositoryInterfaces
 {
     public interface IEmployeeLanguageRepository
     {
+        Task<int> CreateEmployeeLanguageAsync(EmployeeLanguage employeeLanguage);
+
+        Task<EmployeeLanguage?> GetEmployeeLanguageByIdAsync(int id);
+
+        Task<int> UpdateEmployeeLanguageAsync(EmployeeLanguage employeeLanguage);
+
+        Task<int> DeleteEmployeeLanguageAsync(EmployeeLanguage employeeLanguage);
     }
 }

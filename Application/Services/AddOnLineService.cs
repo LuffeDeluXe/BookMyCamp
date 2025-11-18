@@ -3,17 +3,53 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Application.Exceptions;
+using Application.Messages;
+using Application.RepositoryInterfaces;
 using Application.ServiceInterfaces;
+using Domain.Entities.Models;
 
 namespace Application.Services
 {
     public class AddOnLineService : IAddOnLineService
     {
-        private readonly IAddOnLineService _addOnLineService;
+        private readonly IAddOnLineRepository _addOnLineRepository;
 
-        public AddOnLineService(IAddOnLineService addOnLineService)
+        public AddOnLineService(IAddOnLineRepository addOnLineRepository)
         {
-            _addOnLineService = addOnLineService;
+            _addOnLineRepository = addOnLineRepository;
+        }
+
+        public async Task<string> CreateAddOnLineAsync (AddOnLine addOnLine)
+        {
+            int result;
+            string message;
+            result = await _addOnLineRepository.CreateAddOnLineAsync(addOnLine);
+
+            if (result == 0)
+            {
+                throw new CreateEntityException<AddOnLine>();
+            }
+
+            return SuccessMessage.Created<AddOnLine>();
+        }
+
+        public async Task<AddOnLine?> GetAddOnLineByIdAsync (int id)
+        {
+            return await _addOnLineRepository.GetAddOnLineById(id);
+
+        }
+
+        public async Task UpdateAddOnLineAsync (AddOnLine existingAddOnLine, AddOnLine updatedAddOnLine)
+        {
+
+            await _addOnLineRepository.UpdateAddOnLineAsync(existingAddOnLine);
+
+        }
+
+        public async Task DeleteAddOnLineAsync (AddOnLine addOnLine)
+        {
+            await _addOnLineRepository.DeleteAddOnLineAsync(addOnLine);
         }
     }
 }

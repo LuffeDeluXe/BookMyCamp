@@ -9,11 +9,6 @@ namespace Application.Services
 {
     public class LogInService : ILogInService
     {
-        private readonly ILogInService _logInService;
-
-        public LogInService(ILogInService logInService)
-        {
-            _logInService = logInService;
-        }
+       
     }
 }

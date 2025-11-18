@@ -4,16 +4,45 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Application.RepositoryInterfaces;
+using Domain.Entities.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories
 {
     public class EmployeeLanguageRepository : IEmployeeLanguageRepository
     {
-        private readonly IEmployeeLanguageRepository _employeeLanguageRepository;
+        private readonly BookMyCampDbContext _dbContext;
 
-        public EmployeeLanguageRepository(IEmployeeLanguageRepository employeeLanguageRepository)
+        public EmployeeLanguageRepository(BookMyCampDbContext dbContext)
         {
-            _employeeLanguageRepository = employeeLanguageRepository;
+            _dbContext = dbContext;
         }
+
+        public async Task<int> CreateEmployeeLanguageAsync(EmployeeLanguage employeeLanguage)
+        {
+            int result;
+            await _dbContext.AddAsync(employeeLanguage);
+            return result = await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<EmployeeLanguage?> GetEmployeeLanguageByIdAsync(int id)
+        {
+            return await _dbContext.EmployeeLanguages.FindAsync(id);
+        }
+
+        public async Task<int> UpdateEmployeeLanguageAsync(EmployeeLanguage employeeLanguage)
+        {
+            int result;
+            _dbContext.EmployeeLanguages.Update(employeeLanguage);
+            return result = await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<int> DeleteEmployeeLanguageAsync(EmployeeLanguage employeeLanguage)
+        {
+            int result;
+            _dbContext.Update(employeeLanguage);
+            return result = await _dbContext.SaveChangesAsync();
+        }
+
     }
 }

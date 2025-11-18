@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Entities.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,12 @@ namespace Application.RepositoryInterfaces
 {
     public interface IUserRepository
     {
+        Task<int> CreateUserAsync(User user);
+
+        Task<User?> GetUserByIdAsync(int id);
+
+        Task<int> UpdateUserAsync(User user);
+
+        Task<int> DeleteUserAsync(User user);
     }
 }
