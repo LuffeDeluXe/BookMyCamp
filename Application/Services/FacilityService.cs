@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Application.RepositoryInterfaces;
 using Application.ServiceInterfaces;
+using Domain.Entities.Models;
 
 namespace Application.Services
 {
@@ -15,6 +16,11 @@ namespace Application.Services
         public FacilityService(IFacilityRepository facilityRepository)
         {
             _facilityRepository = facilityRepository;
+        }
+
+        public async Task CreateFacilityAsync (Facility facility)
+        {
+
         }
     }
 }

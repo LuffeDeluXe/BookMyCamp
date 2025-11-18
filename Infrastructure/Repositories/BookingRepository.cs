@@ -18,10 +18,12 @@ namespace Infrastructure.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task CreateBookingAsync (Booking booking)
+        public async Task<int> CreateBookingAsync (Booking booking)
         {
             await _dbContext.Bookings.AddAsync (booking);
-            await _dbContext.SaveChangesAsync();
+            int result;
+
+            return result = await _dbContext.SaveChangesAsync();
         }
 
         public async Task<Booking?> GetBookingByIdAsync (int id)
@@ -29,17 +31,21 @@ namespace Infrastructure.Repositories
             return await _dbContext.Bookings.FindAsync(id);
         }
 
-        public async Task UpdateBookingAsync (Booking booking)
+        public async Task<int> UpdateBookingAsync (Booking booking)
         {
              _dbContext.Bookings.Update (booking);
 
-            await _dbContext.SaveChangesAsync();
+            int result;
+
+            return result = await _dbContext.SaveChangesAsync();
         }
 
-        public async Task DeleteBookingAsync (Booking booking)
+        public async Task<int> DeleteBookingAsync (Booking booking)
         {
             _dbContext.Bookings.Remove (booking);
-            await _dbContext.SaveChangesAsync();
+            int result;
+
+            return result = await _dbContext.SaveChangesAsync();
         }
     }
 }

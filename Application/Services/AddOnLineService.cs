@@ -18,10 +18,22 @@ namespace Application.Services
             _addOnLineRepository = addOnLineRepository;
         }
 
-        public async Task CreateAddOnLineAsync (AddOnLine addOnLine)
+        public async Task<string> CreateAddOnLineAsync (AddOnLine addOnLine)
         {
-            await _addOnLineRepository.CreateAddOnLineAsync(addOnLine);
+            int result;
+            string message;
+            result = await _addOnLineRepository.CreateAddOnLineAsync(addOnLine);
 
+            if (result == 0)
+            {
+                message = "Nej";
+            }
+            else
+            {
+                message = "Ja";
+            }
+
+            return message;
         }
 
         public async Task<AddOnLine?> GetAddOnLineByIdAsync (int id)
@@ -32,6 +44,7 @@ namespace Application.Services
 
         public async Task UpdateAddOnLineAsync (AddOnLine existingAddOnLine, AddOnLine updatedAddOnLine)
         {
+
             await _addOnLineRepository.UpdateAddOnLineAsync(existingAddOnLine);
 
         }

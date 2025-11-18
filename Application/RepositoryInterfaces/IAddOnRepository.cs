@@ -9,12 +9,12 @@ namespace Application.RepositoryInterfaces
 {
     public interface IAddOnRepository
     {
-        Task CreateAddOnAsync(AddOn addOn);
+        Task<int> CreateAddOnAsync(AddOn addOn);
 
         Task<AddOn?> GetAddOnByIdAsync(int id);
 
-        Task UpdateAddOnAsync(AddOn addOn);
+        Task<int> UpdateAddOnAsync(AddOn addOn);
 
-        Task DeleteAddOnAsync(AddOn addOn);
+        Task<int> DeleteAddOnAsync(AddOn addOn);
     }
 }

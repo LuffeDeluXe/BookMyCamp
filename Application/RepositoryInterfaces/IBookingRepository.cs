@@ -9,13 +9,13 @@ namespace Application.RepositoryInterfaces
 {
     public interface IBookingRepository
     {
-        Task CreateBookingAsync(Booking booking);
+        Task<int> CreateBookingAsync(Booking booking);
 
         Task<Booking?> GetBookingByIdAsync(int id);
 
-        Task UpdateBookingAsync(Booking booking);
+        Task<int> UpdateBookingAsync(Booking booking);
 
-        Task DeleteBookingAsync(Booking booking);
+        Task<int> DeleteBookingAsync(Booking booking);
 
     }
 }

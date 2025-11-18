@@ -29,10 +29,12 @@ namespace Infrastructure.Repositories
              return await _dbContext.AddOns.FindAsync(id);
         }
 
-        public async Task UpdateAddOnAsync (AddOn addOn)
+        public async Task<int> UpdateAddOnAsync (AddOn addOn)
         {
              _dbContext.AddOns.Update(addOn);
-            await _dbContext.SaveChangesAsync();
+            int result;
+
+            return result = await _dbContext.SaveChangesAsync();
         }
 
         public async Task DeleteAddOnAsync (AddOn addOn)

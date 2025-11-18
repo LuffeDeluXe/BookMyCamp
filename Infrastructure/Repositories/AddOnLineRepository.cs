@@ -18,10 +18,12 @@ namespace Infrastructure.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task CreateAddOnLineAsync (AddOnLine addOnLine)
+        public async Task<int> CreateAddOnLineAsync (AddOnLine addOnLine)
         {
             await _dbContext.AddAsync(addOnLine);
-            await _dbContext.SaveChangesAsync();
+            int result;
+
+            return result = await _dbContext.SaveChangesAsync();
         }
 
         public async Task<AddOnLine?> GetAddOnLineById (int id)
@@ -31,17 +33,21 @@ namespace Infrastructure.Repositories
        
         }
 
-        public async Task UpdateAddOnLineAsync (AddOnLine addOnLine)
+        public async Task<int> UpdateAddOnLineAsync (AddOnLine addOnLine)
         {
              _dbContext.Update(addOnLine);
-            await _dbContext.SaveChangesAsync();
+            int result;
+
+            return result = await _dbContext.SaveChangesAsync();
         }
 
-        public async Task DeleteAddOnLineAsync (AddOnLine addOnLine)
+        public async Task<int> DeleteAddOnLineAsync (AddOnLine addOnLine)
         {
             _dbContext.AddOnsLine.Remove(addOnLine);
 
-            await _dbContext.SaveChangesAsync();
+            int result;
+
+            return result = await _dbContext.SaveChangesAsync();
         }
     }
 }
