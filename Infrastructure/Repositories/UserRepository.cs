@@ -24,6 +24,11 @@ namespace Infrastructure.Repositories
             return result = await _dbContext.SaveChangesAsync();
         }
 
+        public async Task<User?> GetUserByEmailAsync(string email)
+        {
+            return await _dbContext.Users.FindAsync(email);
+        }
+
         public async Task<User?> GetUserByIdAsync(int id)
         {
             return await _dbContext.Users.FindAsync(id);
