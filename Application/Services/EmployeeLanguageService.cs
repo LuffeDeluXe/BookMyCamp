@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Application.Exceptions;
+using Application.Messages;
 using Application.RepositoryInterfaces;
 using Application.ServiceInterfaces;
 using Domain.Entities.Models;
@@ -21,18 +23,14 @@ namespace Application.Services
         public async Task<string> CreateEmployeeLanguageAsync(EmployeeLanguage employeeLanguage)
         {
             int result;
-            string message;
             result = await _employeeLanguageRepository.CreateEmployeeLanguageAsync(employeeLanguage);
 
-            if (result == 0) 
+            if (result == 0)
             {
-                message = "fejl";
+                throw new CreateEntityException<EmployeeLanguage>();
             }
-            else 
-            {
-                message = "success";
-            }
-            return message;
+
+            return SuccessMessage.Created<EmployeeLanguage>();
         }
 
         public async Task<EmployeeLanguage?> GetEmployeeLanguageByIdAsync(int id)
@@ -40,40 +38,37 @@ namespace Application.Services
             return await _employeeLanguageRepository.GetEmployeeLanguageByIdAsync(id);
         }
 
+        //public async Task<List<EmployeeLanguage>> GetEmployeeLanguagesAsync ()
+        //{
+        //    return  _employeeLanguageRepository.GetAllEmployeeLanguagesAsync();
+        //}
+
         public async Task<string> UpdateEmployeeLanguageAsync(EmployeeLanguage existingEmployeeLanguage, EmployeeLanguage updatedEmployeeLanguage)
         {
             int result;
-            string message;
+
             result = await _employeeLanguageRepository.UpdateEmployeeLanguageAsync(existingEmployeeLanguage);
             if (result == 0)
             {
-                message = "fejl";
+                throw new UpdateEntityException<EmployeeLanguage>();
             }
-            else
-            {
-                message = "success";
-            }
-            return message;
+
+            return SuccessMessage.Updated<EmployeeLanguage>();
         }
+                
 
         public async Task<string> DeleteEmployeeLanguageAsync(EmployeeLanguage employeeLanguage)
         {
             int result;
-            string message;
             result = await _employeeLanguageRepository.DeleteEmployeeLanguageAsync(employeeLanguage);
 
             if (result == 0)
             {
-                message = "fejl";
+                throw new DeleteEntityException<EmployeeLanguage>();
             }
-            else
-            {
-                message = "success";
-            }
-            return message;
+
+            return SuccessMessage.Deleted<EmployeeLanguage>();
         }
     }
 }
 
-
-//Hello sunshine the earth says "Hellooo"

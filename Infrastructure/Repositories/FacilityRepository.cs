@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Application.RepositoryInterfaces;
 using Domain.Entities.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories
 {
@@ -17,10 +18,13 @@ namespace Infrastructure.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task CreateFacilityAsync (Facility facility)
+        public async Task<int> CreateFacilityAsync (Facility facility)
         {
+
+            int result;
             await _dbContext.Facilities.AddAsync (facility);
-            await _dbContext.SaveChangesAsync();
+            
+            return result = await _dbContext.SaveChangesAsync();
         }
 
         public async Task<Facility?> GetFacilityByIdAsyc (int id)
@@ -29,14 +33,29 @@ namespace Infrastructure.Repositories
 
         }
 
+        public async Task<List<Facility>> GetAllFacilitiesAsync()
+        {
+            return await _dbContext.Facilities.ToListAsync();
+        }
+
+
         public async Task<int> UpdateFacilityAsync (Facility facility)
         {
-             _dbContext.Facilities.Update(facility);
-
             int result;
+
+            _dbContext.Facilities.Update(facility);
 
            return result =  await _dbContext.SaveChangesAsync();
 
+        }
+
+        public async Task<int> DeleteFacilityAsync (Facility facility)
+        {
+            int result;
+
+            _dbContext.Facilities.Remove(facility);
+
+            return result = await _dbContext.SaveChangesAsync();
         }
     }
 }

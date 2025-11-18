@@ -13,6 +13,8 @@ namespace Application.RepositoryInterfaces
 
         Task<EmployeeLanguage?> GetEmployeeLanguageByIdAsync(int id);
 
+        Task<List<Employee>> GetAllEmployeeLanguagesAsync();
+
         Task<int> UpdateEmployeeLanguageAsync(EmployeeLanguage employeeLanguage);
 
         Task<int> DeleteEmployeeLanguageAsync(EmployeeLanguage employeeLanguage);
