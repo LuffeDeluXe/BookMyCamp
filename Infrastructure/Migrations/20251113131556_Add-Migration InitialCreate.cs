@@ -100,7 +100,7 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AddOnsLine",
+                name: "AddOnLines",
                 columns: table => new
                 {
                     AddOnLineId = table.Column<int>(type: "int", nullable: false)
@@ -247,7 +247,7 @@ namespace Infrastructure.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_AddOnsLine_AddOnId",
-                table: "AddOnsLine",
+                table: "AddOnLines",
                 column: "AddOnId");
 
             migrationBuilder.CreateIndex(
@@ -290,7 +290,7 @@ namespace Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AddOnsLine");
+                name: "AddOnLines");
 
             migrationBuilder.DropTable(
                 name: "Bookings");
