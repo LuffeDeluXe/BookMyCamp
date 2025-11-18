@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Application.Exceptions;
+using Application.Messages;
 using Application.RepositoryInterfaces;
 using Application.ServiceInterfaces;
 using Domain.Entities.Models;
@@ -26,14 +28,10 @@ namespace Application.Services
 
             if (result == 0)
             {
-                message = "Nej";
-            }
-            else
-            {
-                message = "Ja";
+                throw new CreateEntityException<AddOnLine>();
             }
 
-            return message;
+            return SuccessMessage.Created<AddOnLine>();
         }
 
         public async Task<AddOnLine?> GetAddOnLineByIdAsync (int id)
