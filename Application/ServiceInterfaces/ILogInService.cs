@@ -8,7 +8,7 @@ namespace Application.ServiceInterfaces
 {
     public interface ILogInService
     {
-        Task<string> LoginCheck(int userId, string incomingEmail, string incomingPassword);
+        Task<string> LoginCheck(string incomingEmail, string incomingPassword);
 
         bool VerifyPassword(string passwordInput, string password);
     }
