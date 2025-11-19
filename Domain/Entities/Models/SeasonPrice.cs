@@ -12,6 +12,8 @@ namespace Domain.Entities.Models
 
         public string SeasonName { get; set; }
 
+        public int Price { get; set; }
+
         public DateOnly SeasonStart { get; set; }
 
         public DateOnly SeasonEnd { get; set; }

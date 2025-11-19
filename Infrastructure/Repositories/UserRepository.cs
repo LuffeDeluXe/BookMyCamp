@@ -20,7 +20,9 @@ namespace Infrastructure.Repositories
         public async Task<int> CreateUserAsync(User user)
         {
             int result;
+
             await _dbContext.Users.AddAsync(user);
+
             return result = await _dbContext.SaveChangesAsync();
         }
 
@@ -37,14 +39,18 @@ namespace Infrastructure.Repositories
         public async Task<int> UpdateUserAsync(User user)
         {
             int result;
+
             _dbContext.Users.Update(user);
+
             return result = await _dbContext.SaveChangesAsync();
         }
 
         public async Task<int> DeleteUserAsync(User user)
         {
             int result;
+
             _dbContext.Users.Remove(user);
+
             return result = await _dbContext.SaveChangesAsync();
         }
 

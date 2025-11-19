@@ -19,6 +19,10 @@ namespace Domain.Entities.Models
         [Required]
         public virtual AddOn AddOn { get; set; }
 
+        [ForeignKey(nameof (BookingId))]
+        public int BookingId { get; set; }
+        public virtual Booking Booking { get; set; }
+
         [Required]
         public int Amount { get; set; }
 

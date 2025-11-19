@@ -16,6 +16,6 @@ namespace Domain.Entities.Models
         public string Product {  get; set; }
 
         [Required]
-        public int Prize { get; set; }
+        public int Price { get; set; }
     }
 }

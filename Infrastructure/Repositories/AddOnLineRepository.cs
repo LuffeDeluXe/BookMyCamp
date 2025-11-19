@@ -30,14 +30,14 @@ namespace Infrastructure.Repositories
 
         public async Task<AddOnLine?> GetAddOnLineById (int id)
         {
-            return await _dbContext.AddOnsLine.FindAsync(id);
+            return await _dbContext.AddOnLines.FindAsync(id);
 
        
         }
 
         public async Task<List<AddOnLine>> GetAllAddOnLinesAsync ()
         {
-            return await _dbContext.AddOnsLine.ToListAsync();
+            return await _dbContext.AddOnLines.ToListAsync();
         }
 
         public async Task<int> UpdateAddOnLineAsync (AddOnLine addOnLine)
@@ -54,7 +54,7 @@ namespace Infrastructure.Repositories
         {
             int result;
 
-            _dbContext.AddOnsLine.Remove(addOnLine);
+            _dbContext.AddOnLines.Remove(addOnLine);
 
      
             return result = await _dbContext.SaveChangesAsync();

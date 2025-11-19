@@ -16,7 +16,7 @@ namespace Infrastructure
 
         public virtual DbSet<AddOn> AddOns { get; set; }
 
-        public virtual DbSet<AddOnLine> AddOnsLine { get; set; }
+        public virtual DbSet<AddOnLine> AddOnLines { get; set; }
 
         public virtual DbSet<Booking> Bookings { get; set; }
 

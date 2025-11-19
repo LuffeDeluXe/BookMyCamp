@@ -68,7 +68,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("AddOnId");
 
-                    b.ToTable("AddOnsLine");
+                    b.ToTable("AddOnLines");
                 });
 
             modelBuilder.Entity("Domain.Entities.Models.Booking", b =>
