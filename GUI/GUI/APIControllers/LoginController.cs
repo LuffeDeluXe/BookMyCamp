@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Application.APIInterfaces;
+using Application.DTOs;
 using Application.ServiceInterfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,9 +23,21 @@ namespace GUI.APIControllers
         }
 
         [HttpPost("Login")]
-        public async Task<IActionResult> Login(SignInModel dto)
+        public async Task<IActionResult> Login(LoginDTO dto)
         {
-            
+            var user = await _logInService.LoginCheck(dto.Email, dto.Password);
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+
+            var token = _jwtService.GenerateJWTToken(user);
+
+            return Ok(new
+            {
+                token = token,
+                user = user
+            });
         }
     }
 }

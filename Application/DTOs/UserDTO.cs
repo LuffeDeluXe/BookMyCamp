@@ -49,6 +49,13 @@ namespace Application.DTOs
 
     }
 
-
+    public class UserLoginDTO
+    {
+        public int GuestId { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public int PhoneNumber { get; set; }
+        public string LandCode { get; set; }
+    }
 }
 

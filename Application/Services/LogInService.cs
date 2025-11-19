@@ -10,6 +10,8 @@ using Domain.Entities.Models;
 using Bcrypt = BCrypt.Net.BCrypt;
 using Application.Messages;
 using Application.Exceptions;
+using Application.DTOs;
+using Application.Mappers;
 
 namespace Application.Services
 {
@@ -24,9 +26,10 @@ namespace Application.Services
             _passwordHasherService = passwordHasherService;
         }
 
-        public async Task<string> LoginCheck(string incomingEmail, string incomingPassword)
+        public async Task<UserLoginDTO> LoginCheck(string incomingEmail, string incomingPassword)
         {
             User? user = await _guestService.GetUserByEmailAsync(incomingEmail);
+            
 
             if (user != null)
             {
@@ -34,16 +37,16 @@ namespace Application.Services
 
                 if (user.Email == incomingEmail && isCorrectPassword == true)
                 {
-                    return LoginMessages.LoginSuccess();
+                    return UserMapper.ToLoginDTO(user);
                 }
                 else
                 {
-                    throw new IncorrectPasswordException();
+                    throw new IncorrectLoginException();
                 }
             }
             else
             {
-                throw new NoUserFoundException();
+                throw new IncorrectLoginException();
             }
         }
 
