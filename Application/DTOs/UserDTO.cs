@@ -55,7 +55,8 @@ namespace Application.DTOs
         public string Name { get; set; }
         public string Email { get; set; }
         public int PhoneNumber { get; set; }
-        public string LandCode { get; set; }
+        public string Country { get; set; }
+        public bool IsUser { get; set; }
     }
 }
 

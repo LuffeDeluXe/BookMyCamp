@@ -8,6 +8,6 @@ namespace Application.APIInterfaces
 {
     public interface IJWTService
     {
-        string GenerateJWTToken(UserLoginDTO userDTO);
+        string GenerateUserJWTToken(UserLoginDTO userDTO);
     }
 }

@@ -17,7 +17,8 @@ namespace Application.Mappers
                 Name = user.Name,
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber,
-                LandCode = user.LandCode
+                Country = user.Country,
+                IsUser = user.IsUser
             };
         }
     }

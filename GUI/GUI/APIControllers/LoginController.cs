@@ -26,12 +26,13 @@ namespace GUI.APIControllers
         public async Task<IActionResult> Login(LoginDTO dto)
         {
             var user = await _logInService.LoginCheck(dto.Email, dto.Password);
+
             if (user == null)
             {
                 return Unauthorized();
             }
 
-            var token = _jwtService.GenerateJWTToken(user);
+            var token = _jwtService.GenerateUserJWTToken(user);
 
             return Ok(new
             {

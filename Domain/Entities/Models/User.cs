@@ -11,7 +11,7 @@ namespace Domain.Entities.Models
     {
 
         [Required]
-        public string Adress {  get; set; }
+        public string Adress { get; set; }
 
         [Required]
         public string Country { get; set; }
@@ -24,5 +24,8 @@ namespace Domain.Entities.Models
 
         [Required]
         public string HashedPassword { get; set; }
+
+        [Required]
+        public bool IsUser { get; set; }
     }
 }

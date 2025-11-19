@@ -6,6 +6,9 @@ using Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 using Application.RepositoryInterfaces;
 using Infrastructure.Repositories;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.AspNetCore.Components;
 
 namespace GUI;
 
@@ -56,6 +59,26 @@ public class Program
         builder.Services.AddScoped<ITempUserRepository, TempUserRepository>();
         builder.Services.AddScoped<IUserRepository, UserRepository>();
 
+        builder.Services.AddAuthentication("Bearer").AddJwtBearer("Bearer", options =>
+        {
+            options.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = false,
+                ValidateAudience = false,
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(
+                    Encoding.UTF8.GetBytes(builder.Configuration["AppSettings:Token"]))
+            };
+        });
+
+        builder.Services.AddScoped(sp =>
+        {
+            var navigationManager = sp.GetRequiredService<NavigationManager>();
+            return new HttpClient
+            {
+                BaseAddress = new Uri(navigationManager.BaseUri)
+            };
+        });
 
         var app = builder.Build();
 
