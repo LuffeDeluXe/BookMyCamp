@@ -38,10 +38,6 @@ namespace Application.Services
             return await _employeeLanguageRepository.GetEmployeeLanguageByIdAsync(id);
         }
 
-        //public async Task<List<EmployeeLanguage>> GetEmployeeLanguagesAsync ()
-        //{
-        //    return  _employeeLanguageRepository.GetAllEmployeeLanguagesAsync();
-        //}
 
         public async Task<string> UpdateEmployeeLanguageAsync(EmployeeLanguage existingEmployeeLanguage, EmployeeLanguage updatedEmployeeLanguage)
         {
