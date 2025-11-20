@@ -4,20 +4,21 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>aspnet-LoginAPI-785ce87b-941e-4ef8-9643-31e28661755f</UserSecretsId>
+    <UserSecretsId>aspnet-BookMyCamp.Server-425c3d45-f7a3-4886-a14a-8914cffb85a4</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.20" NoWarn="NU1605" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="8.0.20" NoWarn="NU1605" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.22" />
     <PackageReference Include="Microsoft.Identity.Web" Version="4.1.0" />
-    <PackageReference Include="Microsoft.Identity.Web.DownstreamApi" Version="3.2.0" />
+    <PackageReference Include="Microsoft.Identity.Web.DownstreamApi" Version="4.1.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../../../Application/Application.csproj" />
+    <ProjectReference Include="../Application/Application.csproj" />
+    <ProjectReference Include="../Domain/Domain.csproj" />
+    <ProjectReference Include="../Infrastructure/Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
