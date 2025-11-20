@@ -7,7 +7,7 @@ using Application.DTOs;
 using Application.ServiceInterfaces;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GUI.APIControllers
+namespace BookMyCamp.Server.APIControllers
 {
     [ApiController]
     [Route("api/[controller]")]

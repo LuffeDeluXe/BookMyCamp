@@ -1,16 +1,17 @@
-using GUI.Client.Pages;
-using GUI.Components;
-using Application.ServiceInterfaces;
-using Application.Services;
-using Infrastructure;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Identity.Web;
+using Microsoft.Identity.Abstractions;
+using Microsoft.Identity.Web.Resource;
 using Microsoft.Extensions.DependencyInjection;
-using Application.RepositoryInterfaces;
 using Infrastructure.Repositories;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using Microsoft.AspNetCore.Components;
+using Domain;
+using Application.Services;
+using Application.ServiceInterfaces;
+using Application.RepositoryInterfaces;
+using Infrastructure;
 
-namespace GUI;
+namespace BookMyCamp.Server;
 
 public class Program
 {
@@ -19,15 +20,13 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
-        builder.Services.AddRazorComponents()
-            .AddInteractiveServerComponents()
-            .AddInteractiveWebAssemblyComponents();
+        builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
 
-        builder.WebHost.ConfigureKestrel((context, serverOptions) =>
-        {
-            serverOptions.ListenAnyIP(25001);
-            serverOptions.ListenAnyIP(25002);
-        });
+        builder.Services.AddControllers();
+        // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+        builder.Services.AddEndpointsApiExplorer();
+        builder.Services.AddSwaggerGen();
 
         //DBContext Injection
         builder.Services.AddDbContext<BookMyCampDbContext>();
@@ -85,24 +84,16 @@ public class Program
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
         {
-            app.UseWebAssemblyDebugging();
-        }
-        else
-        {
-            app.UseExceptionHandler("/Error");
-            // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-            app.UseHsts();
+            app.UseSwagger();
+            app.UseSwaggerUI();
         }
 
         app.UseHttpsRedirection();
 
-        app.UseStaticFiles();
-        app.UseAntiforgery();
+        app.UseAuthorization();
 
-        app.MapRazorComponents<App>()
-            .AddInteractiveServerRenderMode()
-            .AddInteractiveWebAssemblyRenderMode()
-            .AddAdditionalAssemblies(typeof(Client._Imports).Assembly);
+
+        app.MapControllers();
 
         app.Run();
     }
