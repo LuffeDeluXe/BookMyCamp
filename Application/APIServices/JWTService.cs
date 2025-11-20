@@ -8,8 +8,9 @@ using System.Text;
 using Application.APIInterfaces;
 using Application.DTOs;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Extensions.Configuration;
 
-namespace Infrastructure.APIs.APIServices
+namespace Application.APIServices
 {
     public class JWTService : IJWTService
     {

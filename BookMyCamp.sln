@@ -12,10 +12,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookMyCamp.Server", "BookMy
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GUI", "GUI\GUI.csproj", "{36600325-0560-EFB1-C079-4E957C39FC52}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "APIs", "APIs", "{FC1A19CD-975C-FCCF-314A-81796257AEC2}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoginAPI", "Infrastructure\APIs\LoginAPI\LoginAPI.csproj", "{6FB37180-6FC3-A0A4-7BE2-8059B6890B4D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,19 +38,11 @@ Global
 		{36600325-0560-EFB1-C079-4E957C39FC52}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{36600325-0560-EFB1-C079-4E957C39FC52}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{36600325-0560-EFB1-C079-4E957C39FC52}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6FB37180-6FC3-A0A4-7BE2-8059B6890B4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6FB37180-6FC3-A0A4-7BE2-8059B6890B4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6FB37180-6FC3-A0A4-7BE2-8059B6890B4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6FB37180-6FC3-A0A4-7BE2-8059B6890B4D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{FC1A19CD-975C-FCCF-314A-81796257AEC2} = {A4DFF9EB-F7F5-B160-081D-3F97E8F0776E}
-		{6FB37180-6FC3-A0A4-7BE2-8059B6890B4D} = {FC1A19CD-975C-FCCF-314A-81796257AEC2}
-	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {FCA37C10-6A64-4846-AF27-B1AB161C39B8}
+		SolutionGuid = {691A5E43-28AD-41A9-9166-7C2B697775B5}
 	EndGlobalSection
 EndGlobal
