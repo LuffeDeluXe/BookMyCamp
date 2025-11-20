@@ -11,6 +11,8 @@ namespace Application.RepositoryInterfaces
     {
         Task<int> CreateUserAsync(User user);
 
+        Task<User?> GetUserByEmailAsync(string email);
+
         Task<User?> GetUserByIdAsync(int id);
 
         Task<int> UpdateUserAsync(User user);

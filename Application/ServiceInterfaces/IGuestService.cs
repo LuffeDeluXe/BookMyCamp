@@ -11,6 +11,8 @@ namespace Application.ServiceInterfaces
     {
         Task<string> CreateUserAsync(User user);
 
+        Task<User?> GetUserByEmailAsync(string email);
+
         Task<User?> GetUserByIdAsync(int id);
 
         Task<string> UpdateUserAsync(User existingUser, User updatedUser);

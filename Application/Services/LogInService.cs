@@ -6,68 +6,55 @@ using System.Threading.Tasks;
 using Application.Exceptions;
 using Application.Messages;
 using Application.ServiceInterfaces;
+using Domain.Entities.Models;
+using Bcrypt = BCrypt.Net.BCrypt;
+using Application.Messages;
+using Application.Exceptions;
+using Application.DTOs;
+using Application.Mappers;
 
 namespace Application.Services
 {
     public class LogInService : ILogInService
     {
-        private readonly ILogInService _logInService;
+        private readonly IGuestService _guestService;
+        private readonly IPasswordHasherService _passwordHasherService;
 
-        public LogInService(ILogInService logInService)
+        public LogInService(GuestService guestService, IPasswordHasherService passwordHasherService)
         {
-            _logInService = logInService;
+            _guestService = guestService;
+            _passwordHasherService = passwordHasherService;
         }
 
-        //public async Task<string> CreateLogInAsync(LogIn logIn)
-        //{
-        //    int result;
+        public async Task<UserLoginDTO> LoginCheck(string incomingEmail, string incomingPassword)
+        {
+            User? user = await _guestService.GetUserByEmailAsync(incomingEmail);
+            
 
-        //    string message;
-        //    result = await _logInService.CreateLogInAsync(logIn);
+            if (user != null)
+            {
+                bool isCorrectPassword = VerifyPassword(incomingPassword, user.HashedPassword);
 
-        //    if (result == 0)
-        //    {
-        //        throw new CreateEntityException<LogIn>();
-        //    }
+                if (user.Email == incomingEmail && isCorrectPassword == true)
+                {
+                    return UserMapper.ToLoginDTO(user);
+                }
+                else
+                {
+                    throw new IncorrectLoginException();
+                }
+            }
+            else
+            {
+                throw new IncorrectLoginException();
+            }
+        }
 
-        //    return SuccessMessage.Created<LogIn>();
-        //}
+        public bool VerifyPassword(string incomingPassword, string storedPassword)
+        {
+            bool correctPassword = Bcrypt.EnhancedVerify(incomingPassword, storedPassword);
 
-
-        //public async Task<LogIn?> GetLogInByIdAsync(int id)
-        //{
-        //    return await _logInService.GetLogInByIdAsync(id);
-        //}
-
-
-        //public async Task<string> UpdateLogInAsync(LogIn existinLogIn, LogIn updatedLogIn)
-        //{
-        //    int result;
-
-        //    string message;
-        //    result = await _logInService.UpdateLogInAsync(existingLogIn);
-
-        //    if (result == 0)
-        //    {
-        //        throw new UpdateEntityException<LogIn>();
-        //    }
-
-        //    return SuccessMessage.Updated<LogIn>();
-        //}
-
-        //public async Task<string> DeleteLogInAsync(LogIn logIn)
-        //{
-        //    int result;
-
-        //    string message;
-        //    result = await _logInService.DeleteLogInAsync(logIn);
-
-        //    if (result == 0)
-        //    {
-        //        throw new DeleteEntityException<LogIn>();
-        //    }
-
-        //    return SuccessMessage.Deleted<LogIn>();
-        //}
+            return correctPassword;
+        }
     }
 }

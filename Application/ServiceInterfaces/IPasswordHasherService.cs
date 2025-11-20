@@ -9,12 +9,6 @@ namespace Application.ServiceInterfaces
 {
     public interface IPasswordHasherService
     {
-        //Task<string> CreatePasswordHasherAsync(PasswordHasher passwordHasher);
-
-        //Task<PasswordHasher?> GetPasswordHasherByIdAsync(int  id);
-
-        //Task<string> UpdatePasswordHasherAsync(PasswordHasher existingPasswordHasher, PasswordHasher updatedPasswordHasher);
-
-        //Task<string> DeletePasswordHasherAsync(PasswordHasher passwordHasher);
+        string HashPassword(string password);
     }
 }
