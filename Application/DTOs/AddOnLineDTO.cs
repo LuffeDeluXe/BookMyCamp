@@ -19,16 +19,6 @@ namespace Application.DTOs
 
     }
 
-    public class AddOnDetailsLineDTO
-    {
-        public int AddOnLineId { get; set; }
-        public int AddOnId { get; set; }
-        public string AddOnProduct { get; set; }
-        public int IndividualPrice { get; set; }
-        public int Amount { get; set; }
-        public int PriceSum { get; set; }
-    }
-
     public class AddOnListLineDTO
     {
         public int AddOnLineId { get; set; }

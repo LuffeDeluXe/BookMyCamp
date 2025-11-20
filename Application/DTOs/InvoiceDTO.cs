@@ -24,6 +24,13 @@ namespace Application.DTOs
 
     }
 
+    public class InvoiceDetailsDTO
+    {
+        public int InvoiceId { get; set; }
+        public int BookingId { get; set; }
+        public DateOnly OrderDate { get; set; }
 
+        public int TotalSum { get; set; }
+
+    }
 }
-

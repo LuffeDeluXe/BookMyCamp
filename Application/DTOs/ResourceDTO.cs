@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace Application.DTOs
 {
-    public class CreateListResourceDTO
+    public class CreateResourceDTO
     {
         public string ResourceLocation { get; set; }
 
-        public int ResourceType { get; set; }
+        public string ResourceType { get; set; }
         public int Size { get; set; }
 
         public int Capacity { get; set; }
@@ -25,11 +25,24 @@ namespace Application.DTOs
 
     }
 
+    public class UpdateResourceDTO
+    {
+
+        public string ResourceType { get; set; }
+        public int Size { get; set; }
+
+        public int Capacity { get; set; }
+
+        public string Category { get; set; }
+
+        public int BasePrice { get; set; }
+    }
+
     public class ResourceListDTO
     {
         public int ResourceId { get; set; }
 
-        public int ResourceType { get; set; }
+        public string ResourceType { get; set; }
         public int Size { get; set; }
 
         public int Capacity { get; set; }
@@ -44,7 +57,7 @@ namespace Application.DTOs
     {
         public int ResourceId { get; set; }
 
-        public int ResourceType { get; set; }
+        public string ResourceType { get; set; }
         public int Size { get; set; }
 
         public int Capacity { get; set; }

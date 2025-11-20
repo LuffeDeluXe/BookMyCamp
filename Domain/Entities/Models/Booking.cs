@@ -32,8 +32,6 @@ namespace Domain.Entities.Models
         [Required]
         public DateOnly StartDate { get; set; }
 
-        public virtual ICollection<AddOnLine> AddOnLines { get; set; }
-
         [Required]
         public DateOnly EndDate { get; set; }
 
