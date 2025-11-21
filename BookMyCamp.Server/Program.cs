@@ -10,6 +10,10 @@ using Application.Services;
 using Application.ServiceInterfaces;
 using Application.RepositoryInterfaces;
 using Infrastructure;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.Options;
 
 namespace BookMyCamp.Server;
 
@@ -18,10 +22,6 @@ public class Program
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
-
-        // Add services to the container.
-        builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
 
         builder.Services.AddControllers();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -58,16 +58,30 @@ public class Program
         builder.Services.AddScoped<ITempUserRepository, TempUserRepository>();
         builder.Services.AddScoped<IUserRepository, UserRepository>();
 
-        builder.Services.AddAuthentication("Bearer").AddJwtBearer("Bearer", options =>
+        builder.Services.AddAuthentication(options =>
         {
-            options.TokenValidationParameters = new TokenValidationParameters
+            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+        })
+            .AddJwtBearer(options =>
             {
-                ValidateIssuer = false,
-                ValidateAudience = false,
-                ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(
-                    Encoding.UTF8.GetBytes(builder.Configuration["AppSettings:Token"]))
-            };
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = false,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = builder.Configuration["Jwt:Issuer"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!))
+                };
+            });
+
+        builder.Services.AddAuthorization(options =>
+        {
+            options.AddPolicy("AdminPolicy", policy => policy.RequireRole("Admin"));
+            options.AddPolicy("EmployeePolicy", policy => policy.RequireRole("Employee"));
+            options.AddPolicy("UserPolicy", policy => policy.RequireRole("User"));
         });
 
         builder.Services.AddScoped(sp =>
