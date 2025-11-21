@@ -13,6 +13,8 @@ namespace Application.ServiceInterfaces
 
         Task<Employee?> GetEmployeeByIdAsync(int id);
 
+        Task<Employee?> GetEmployeeByEmailAsync(string email);
+
         Task<List<Employee>> GetAllEmployeesAsync();
 
         Task<string> UpdateEmployeeAsync(Employee existingEmployee, Employee updatedEmployee);

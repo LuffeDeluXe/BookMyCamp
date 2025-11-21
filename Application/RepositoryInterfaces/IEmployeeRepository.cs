@@ -13,6 +13,8 @@ namespace Application.RepositoryInterfaces
 
         Task<Employee?> GetEmployeeByIdAsync(int id);
 
+        Task<Employee?> GetEmployeeByEmailAsync(string email);
+
         Task<List<Employee>> GetAllEmployeesAsync();
 
         Task<int> UpdateEmployeeAsync(Employee employee);

@@ -17,27 +17,27 @@ namespace Application.Services
 {
     public class LogInService : ILogInService
     {
-        private readonly IGuestService _guestService;
+        private readonly IEmployeeService _employeeService;
         private readonly IPasswordHasherService _passwordHasherService;
 
-        public LogInService(IGuestService guestService, IPasswordHasherService passwordHasherService)
+        public LogInService(IEmployeeService employeeService, IPasswordHasherService passwordHasherService)
         {
-            _guestService = guestService;
+            _employeeService = employeeService;
             _passwordHasherService = passwordHasherService;
         }
 
         public async Task<UserLoginDTO> LoginCheck(string incomingEmail, string incomingPassword)
         {
-            User? user = await _guestService.GetUserByEmailAsync(incomingEmail);
+            Employee? employee = await _employeeService.GetEmployeeByEmailAsync(incomingEmail);
             
 
-            if (user != null)
+            if (employee != null)
             {
-                bool isCorrectPassword = VerifyPassword(incomingPassword, user.HashedPassword);
+                bool isCorrectPassword = VerifyPassword(incomingPassword, employee.HashedPassword);
 
-                if (user.Email == incomingEmail && isCorrectPassword == true)
+                if (employee.Email == incomingEmail && isCorrectPassword == true)
                 {
-                    return UserMapper.ToLoginDTO(user);
+                    return UserMapper.ToLoginDTO(employee);
                 }
                 else
                 {

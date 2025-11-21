@@ -38,9 +38,14 @@ namespace Application.Services
             return  await _employeeRepository.GetEmployeeByIdAsync(id);
         }
 
-        public async Task<List<Employee>> GetAllEmployeesAsync ()
+        public async Task<Employee?> GetEmployeeByEmailAsync(string email)
         {
-            return await _employeeRepository.GetAllEmployeesAsync ();
+            return await _employeeRepository.GetEmployeeByEmailAsync(email);
+        }
+
+        public async Task<List<Employee>> GetAllEmployeesAsync()
+        {
+            return await _employeeRepository.GetAllEmployeesAsync();
         }
 
         public async Task<string> UpdateEmployeeAsync(Employee existingEmployee, Employee updatedEmployee)

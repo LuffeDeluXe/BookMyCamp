@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 
 namespace Domain.Entities.Models
 {
@@ -13,12 +14,15 @@ namespace Domain.Entities.Models
         public int EmployeeId { get; set; }
 
         [Required]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         [Required]
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
         [Required]
         public int PhoneNumber { get; set; }
+
+        [Required]
+        public string? HashedPassword { get; set; }
     }
 }

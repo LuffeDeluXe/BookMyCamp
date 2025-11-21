@@ -31,7 +31,11 @@ namespace Infrastructure.Repositories
         public async Task<Employee?> GetEmployeeByIdAsync (int id)
         {
             return await _dbContext.Employees.FindAsync(id);
+        }
 
+        public async Task<Employee?> GetEmployeeByEmailAsync(string email)
+        {
+            return await _dbContext.Employees.FindAsync(email);
         }
 
         public async Task<List<Employee>> GetAllEmployeesAsync()
