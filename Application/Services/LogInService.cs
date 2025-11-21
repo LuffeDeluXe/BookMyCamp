@@ -20,7 +20,7 @@ namespace Application.Services
         private readonly IGuestService _guestService;
         private readonly IPasswordHasherService _passwordHasherService;
 
-        public LogInService(GuestService guestService, IPasswordHasherService passwordHasherService)
+        public LogInService(IGuestService guestService, IPasswordHasherService passwordHasherService)
         {
             _guestService = guestService;
             _passwordHasherService = passwordHasherService;

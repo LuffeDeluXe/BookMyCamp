@@ -22,7 +22,7 @@ namespace BookMyCamp.Server.APIControllers
             _jwtService = jwtService;
         }
 
-        [HttpPost("Login")]
+        [HttpPost("login")]
         public async Task<IActionResult> Login(LoginDTO dto)
         {
             var user = await _logInService.LoginCheck(dto.Email, dto.Password);
