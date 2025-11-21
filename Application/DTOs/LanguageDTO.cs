@@ -10,4 +10,11 @@ namespace Application.DTOs
     {
         public string Name { get; set; }
     }
+
+    public class LanguageListDTO
+    {
+        public int LanguageId { get; set; }
+
+        public string Name { get; set; }
+    }
 }

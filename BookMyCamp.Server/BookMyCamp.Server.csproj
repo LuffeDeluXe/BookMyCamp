@@ -10,8 +10,14 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.20" NoWarn="NU1605" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="8.0.20" NoWarn="NU1605" />
+<<<<<<<< HEAD:BookMyCamp.Server/BookMyCamp.Server.csproj
     <PackageReference Include="Microsoft.Identity.Web" Version="4.1.0" />
     <PackageReference Include="Microsoft.Identity.Web.DownstreamApi" Version="4.1.0" />
+========
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.22" />
+    <PackageReference Include="Microsoft.Identity.Web" Version="4.1.0" />
+    <PackageReference Include="Microsoft.Identity.Web.DownstreamApi" Version="3.2.0" />
+>>>>>>>> origin/HappyNOW:Infrastructure/APIs/LoginAPI/LoginAPI.csproj
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
