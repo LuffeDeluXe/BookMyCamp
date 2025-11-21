@@ -8,8 +8,6 @@ using Application.Messages;
 using Application.ServiceInterfaces;
 using Domain.Entities.Models;
 using Bcrypt = BCrypt.Net.BCrypt;
-using Application.Messages;
-using Application.Exceptions;
 using Application.DTOs;
 using Application.Mappers;
 
@@ -26,7 +24,7 @@ namespace Application.Services
             _passwordHasherService = passwordHasherService;
         }
 
-        public async Task<UserLoginDTO> LoginCheck(string incomingEmail, string incomingPassword)
+        public async Task<EmployeeLoginDTO> LoginCheck(string incomingEmail, string incomingPassword)
         {
             Employee? employee = await _employeeService.GetEmployeeByEmailAsync(incomingEmail);
             
@@ -37,7 +35,7 @@ namespace Application.Services
 
                 if (employee.Email == incomingEmail && isCorrectPassword == true)
                 {
-                    return UserMapper.ToLoginDTO(employee);
+                    return EmployeeMapper.ToEmployeeLoginDTO(employee);
                 }
                 else
                 {

@@ -21,8 +21,5 @@ namespace Domain.Entities.Models
 
         [Required]
         public int PhoneNumber { get; set; }
-
-        [Required]
-        public string? HashedPassword { get; set; }
     }
 }

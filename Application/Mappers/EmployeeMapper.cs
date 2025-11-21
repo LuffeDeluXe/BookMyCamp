@@ -10,10 +10,10 @@ namespace Application.Mappers
 {
     public static class EmployeeMapper
     {
-        public static Employee ToEntity (this EmployeeDTO dto)
-            => new Employee { Name =  dto.Name, Email = dto.Email, PhoneNumber = dto.PhoneNumber };
+        public static Employee ToEntity(this EmployeeDTO dto)
+            => new Employee { Name = dto.Name, Email = dto.Email, PhoneNumber = dto.PhoneNumber };
 
-        public static Employee ToUpdateEntity (this EmployeeDTO dto, Employee existing)
+        public static Employee ToUpdateEntity(this EmployeeDTO dto, Employee existing)
         {
             existing.Email = dto.Email;
             existing.PhoneNumber = dto.PhoneNumber;
@@ -24,6 +24,17 @@ namespace Application.Mappers
 
         public static EmployeeDTO ToListDetailsDTO(this Employee entity)
             => new EmployeeDTO { PhoneNumber = entity.PhoneNumber, Email = entity.Email, Name = entity.Name };
+
+        public static EmployeeLoginDTO ToEmployeeLoginDTO(Employee employee)
+        {
+            return new EmployeeLoginDTO
+            {
+                EmployeeId = employee.EmployeeId,
+                Name = employee.Name,
+                Email = employee.Email,
+                PhoneNumber = employee.PhoneNumber,
+            };
+        }
 
     }
 }

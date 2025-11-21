@@ -23,6 +23,8 @@ namespace Infrastructure
         public virtual DbSet<Employee> Employees { get; set; }
 
         public virtual DbSet<EmployeeLanguage> EmployeeLanguages { get; set; }
+        
+        public virtual DbSet<EmployeeLogin> EmployeeLogins { get; set; }
 
         public virtual DbSet<Facility> Facilities { get; set; }
 

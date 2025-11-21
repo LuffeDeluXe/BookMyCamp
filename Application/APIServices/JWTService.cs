@@ -21,18 +21,17 @@ namespace Application.APIServices
             _configuration = configuration;
         }
 
-        public string GenerateUserJWTToken(UserLoginDTO userDTO)
+        public string GenerateEmployeeJWTToken(EmployeeLoginDTO employeeDTO)
         {
-            var key = Encoding.UTF8.GetBytes(_configuration["AppSettings:Token"]);
+            var key = Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]);
 
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.NameIdentifier, userDTO.GuestId.ToString()),
-                new Claim(ClaimTypes.Name, userDTO.Name),
-                new Claim(ClaimTypes.Email, userDTO.Email),
-                new Claim(ClaimTypes.MobilePhone, userDTO.PhoneNumber.ToString()),
-                new Claim(ClaimTypes.Country, userDTO.Country),
-                new Claim(ClaimTypes.Role, userDTO.IsUser ? "User" : "User")
+                new Claim(ClaimTypes.NameIdentifier, employeeDTO.EmployeeId.ToString()),
+                new Claim(ClaimTypes.Name, employeeDTO.Name),
+                new Claim(ClaimTypes.Email, employeeDTO.Email),
+                new Claim(ClaimTypes.MobilePhone, employeeDTO.PhoneNumber.ToString()),
+                new Claim(ClaimTypes.Role, employeeDTO.IsUser ? "User" : "User")
             };
 
             var credentials = new SigningCredentials(

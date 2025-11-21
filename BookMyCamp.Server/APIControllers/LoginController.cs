@@ -25,19 +25,19 @@ namespace BookMyCamp.Server.APIControllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginDTO dto)
         {
-            var user = await _logInService.LoginCheck(dto.Email, dto.Password);
+            var employee = await _logInService.LoginCheck(dto.Email, dto.Password);
 
-            if (user == null)
+            if (employee == null)
             {
                 return Unauthorized();
             }
 
-            var token = _jwtService.GenerateUserJWTToken(user);
+            var token = _jwtService.GenerateEmployeeJWTToken(employee);
 
             return Ok(new
             {
                 token = token,
-                user = user
+                user = employee
             });
         }
     }
